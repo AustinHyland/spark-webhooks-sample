@@ -8,7 +8,7 @@ from constants import token
 def main():
 
     # add authorization to the header
-    header = {"Authorization": "%s" % token}
+    header = {"Authorization": "Bearer %s" % token}
 
     # disable warnings about using certificate verification
     requests.packages.urllib3.disable_warnings()

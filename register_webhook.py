@@ -13,7 +13,7 @@ def register_webhook():
     resp = requests.get(url, headers=headers)
     active_hooks = resp.json()['items']
     for hook in active_hooks:
-        if hook['name'] == 'Cheer Bot':
+        if hook['name'] == webhook_name:
             hook_id = hook['id']
             requests.delete(url + '{}'.format(hook_id), headers=headers)
 
