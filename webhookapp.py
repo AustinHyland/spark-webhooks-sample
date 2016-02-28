@@ -2,6 +2,7 @@
 from flask import Flask, request
 # import  custom-made modules
 import getmessage, gethosts, postmessage
+from register_webhook import register_webhook
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -28,15 +29,15 @@ def webhooks():
     message = getmessage.main(message_id)
     print(message)
 
-    # check if the message is the command to get hosts
-    if message == "GET HOSTS":
-        # get list of hosts from APIC-EM Controller
-        hosts = gethosts.main()
-        # post the list of hosts into the Spark room
-        postmessage.main(person_id, person_email, room_id, hosts)
-    else:
-       print("do nothing")
+    # check if the message is magic word
+    if message == "botson":
+        text = "Botson says:I am a Bot, you are not"
+        # respond with send message
+        postmessage.main(room_id, text)
+    return "ok"
+
 
 # run the application
 if __name__ == "__main__":
-    app.run()
+    register_webhook()
+    app.run(host="0.0.0.0")

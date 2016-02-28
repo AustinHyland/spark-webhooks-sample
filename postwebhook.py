@@ -1,15 +1,14 @@
 # import the requests and json library so we can use it to make REST calls
 import requests, json
 
+from constants import token, room_id, webapp_url, webhook_name
+
 
 # the main function
 def main():
-    # login to developer.ciscospark.com and copy your access token here
-    # Never hard-code access token in production environment
-    token = "Bearer [access token]"
 
     # add authorization to the header
-    header = {"Authorization": "%s" % token, "content-type": "application/json"}
+    header = {"Authorization": "Bearer %s" % token, "content-type": "application/json"}
 
     # disable warnings about using certificate verification
     requests.packages.urllib3.disable_warnings()
@@ -21,9 +20,9 @@ def main():
     payload = {
         "resource": "messages",
         "event": "created",
-        "filter": "roomId=[room_id]",
-        "targetUrl": "[webapp_url]",
-        "name": "[webhook_name]"
+        "filter": "roomId={room_id}".format(room_id=room_id),
+        "targetUrl": "{url}".format(url=webapp_url),
+        "name": "{webhook_name}".format(webhook_name=webhook_name)
     }
 
     # send the POST request resource and do not verify SSL certificate for simplicity of this example
@@ -36,5 +35,5 @@ def main():
     print(response_status)
 
 
-# run the function
-main()
+if __name__ == "__main__":
+    main()

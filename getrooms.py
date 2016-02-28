@@ -1,12 +1,11 @@
 # import the requests library so we can use it to make REST calls
 import requests
 
+from constants import token
+
 
 # the main function
 def main():
-    # login to developer.ciscospark.com and copy your access token here
-    # Never hard-code access token in production environment
-    token = "Bearer [access token]"
 
     # add authorization to the header
     header = {"Authorization": "%s" % token}

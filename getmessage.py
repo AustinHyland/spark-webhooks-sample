@@ -1,17 +1,16 @@
 # import the requests library so we can use it to make REST calls
 import requests
 
+from constants import token
+
 # disable warnings about using certificate verification
 requests.packages.urllib3.disable_warnings()
 
 # the main function
 def main(message_id):
-    # login to developer.ciscospark.com and copy your access token here
-    # Never hard-code access token in production environment
-    token = "Bearer [access token]"
 
     # add authorization to the header
-    header = {"Authorization": "%s" % token}
+    header = {"Authorization": "Bearer %s" % token}
 
     # create request url using message ID
     get_rooms_url = "https://api.ciscospark.com/v1/messages/" + message_id
